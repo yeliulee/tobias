@@ -1,3 +1,32 @@
+# 5.3.4
+* 修复5.3.3中iOS编译问题
+
+# 5.3.3
+* Android Sdk升级到15.8.40
+* iOS Sdk升级到15.8.40.1
+* OpenHarmony Sdk升级到15.8.42
+
+# 5.3.2
+* Merge #177
+
+
+# 5.3.1
+* Merge #176
+
+# 5.3.0
+* Android Sdk升级到15.8.38
+* iOS Sdk升级到15.8.37.1
+* OpenHarmony Sdk升级到15.8.39
+* 新增商户appId注册
+* Android kotlin 升级到2.1.0
+* Android mini SDK升级到24
+
+# 5.2.0
+* Android Sdk升级到15.8.35
+* iOS Sdk升级到15.8.35
+* OpenHarmony Sdk升级到15.8.37
+* 支付支持参数：showPayLoading
+
 ## 5.1.2
 * Android Sdk升级到15.8.33
 * iOS Sdk升级到15.8.32.5

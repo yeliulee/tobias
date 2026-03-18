@@ -10,14 +10,25 @@ class MethodChannelTobias extends TobiasPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('com.jarvanmo/tobias');
 
+
+  @override
+  Future<void> registerApp(String appId,{String? universalLink}) async{
+    return await methodChannel.invokeMethod("registerApp", {"appId": appId, "universalLink": universalLink});
+  }
+
   /// [evn] only supports Android due to native AliPaySDK
   /// [universalLink] only supports iOS
   @override
   Future<Map> pay(String order,
       {AliPayEvn evn = AliPayEvn.online,
+      bool showPayLoading = true,
       String? universalLink}) async {
-    return await methodChannel.invokeMethod("pay",
-        {"order": order, "payEnv": evn.index, "universalLink": universalLink});
+    return await methodChannel.invokeMethod("pay", {
+      "order": order,
+      "showPayLoading": showPayLoading,
+      "payEnv": evn.index,
+      "universalLink": universalLink
+    });
   }
 
   /// 鸿蒙 - 自动订阅支付

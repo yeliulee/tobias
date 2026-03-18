@@ -24,13 +24,15 @@ abstract class TobiasPlatform extends PlatformInterface {
     _instance = instance;
   }
 
-  Future<String?> getPlatformVersion() {
-    throw UnimplementedError('platformVersion() has not been implemented.');
+  /// Register your appId before payment
+  Future<void> registerApp(String appId,{String? universalLink}) async {
+    throw UnimplementedError('registerApp() has not been implemented.');
   }
 
   /// [evn] only supports Android due to native AliPaySDK
   Future<Map> pay(String order,
       {AliPayEvn evn = AliPayEvn.online,
+      bool showPayLoading = true,
       String? universalLink}) async {
     throw UnimplementedError('pay() has not been implemented.');
   }
