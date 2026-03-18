@@ -45,6 +45,9 @@ export default class TobiasPlugin implements FlutterPlugin, MethodCallHandler, A
 
   onMethodCall(call: MethodCall, result: MethodResult): void {
     switch (call.method) {
+      case "registerApp":
+        this.registerApp(call, result);
+        break;
       case "version":
         this.version(result);
         break;
@@ -69,6 +72,13 @@ export default class TobiasPlugin implements FlutterPlugin, MethodCallHandler, A
     }
   }
 
+  registerApp(call: MethodCall, result: MethodResult): void {
+    const appId: string = call.argument("appId");
+    const pay = new alipay.Pay();
+    pay.registerApp(appId);
+    result.success(null);
+  }
+
   version(result: MethodResult): void {
     const pay = new alipay.Pay();
     result.success(pay.getVersion());
@@ -76,7 +86,7 @@ export default class TobiasPlugin implements FlutterPlugin, MethodCallHandler, A
 
   pay(call: MethodCall, result: MethodResult): void {
     const order: string = call.argument("order");
-    const isShowLoading: boolean = true;
+    const isShowLoading: boolean = call.argument("showPayLoading");
     const payment = new alipay.Pay();
     payment.pay(order, isShowLoading)
       .then((res: Map<string, string>) => {
@@ -104,12 +114,12 @@ export default class TobiasPlugin implements FlutterPlugin, MethodCallHandler, A
           result.success(resp)
         }).catch((err: BusinessError) => {
         console.log(TAG, `open link failed. Code is ${err.code}, message is ${err.message}`);
-        resp.set("resultStatus", "erroe");
+        resp.set("resultStatus", "error");
         result.success(resp)
       })
     } catch (paramError) {
       console.log(TAG, `Failed to start link. Code is ${paramError.code}, message is ${paramError.message}`);
-      resp.set("resultStatus", "erroe");
+      resp.set("resultStatus", "error");
       result.success(resp)
     }
   }
